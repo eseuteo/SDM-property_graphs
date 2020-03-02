@@ -5,9 +5,9 @@
                             --delimiter ";"  \
                             --array-delimiter "|"  \
                             --id-type=INTEGER  \
-                            --nodes=Author="path"  \
+                            --nodes=Author="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_author.csv"  \
                             --nodes=Journal=""  \
-                            --nodes=Article=""  \
+                            --nodes=Article="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_article_header.csv,/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_article.csv"  \
                             --nodes=Conference-Workshop="path" \
                             --nodes=Keyword="path" \
                             --relationships=Cites="path" \
