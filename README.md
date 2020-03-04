@@ -8,7 +8,7 @@ test.py, helloworld.py and a2_instantiating.py contain just some code to try the
 #### A.1. Modeling
 Modeling was done taking into account both the description provided and the queries that have to be done in section B.
 
-![Schema](schema.jpg)
+![Schema](schema.jpeg)
 
 #### A.2. Instantiating/Loading
 
