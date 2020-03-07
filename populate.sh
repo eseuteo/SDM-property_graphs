@@ -1,18 +1,18 @@
 #!/bin/bash
 
 ./bin/neo4j-admin import    --skip-bad-relationships=true  \
-                            --database=dblp2  \
+                            --database=sdm-lab1  \
                             --delimiter ";"  \
-                            --array-delimiter "|"  \
+                            --array-delimiter "|" \
                             --id-type=INTEGER  \
-                            --nodes=Author="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_author.csv"  \
-                            --nodes=Journal=""  \
-                            --nodes=Article="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_article_header.csv,/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_article.csv"  \
-                            --nodes=Conference-Workshop="path" \
-                            --nodes=Keyword="path" \
-                            --relationships=Cites="path" \
-                            --relationships=Presented_In="path" \
-                            --relationships=Writes="path" \
-                            --relationships=Reviews="path" \
-                            --relationships=Has="path"  \
-                            --relationships=Published_In=""  \
+                            --nodes=Article="<path-to-folder>/article_node.csv"  \
+                            --nodes=Author="<path-to-folder>/author_node.csv"  \
+                            --nodes=Conference/Workshop="<path-to-folder>/conference_workshop_node.csv" \
+                            --nodes=Journal="<path-to-folder>/journal_node.csv"  \
+                            --nodes=Keyword="<path-to-folder>/keyword_node.csv" \
+                            --relationships=Cites="<path-to-folder>/cites_relationship.csv" \
+                            --relationships=Has_Keyword="<path-to-folder>/has_keyword_relationship.csv"  \
+                            --relationships=Presented_In="<path-to-folder>/presented_in_relationship.csv" \
+                            --relationships=Published_In="<path-to-folder>/published_in_relationship.csv"  \
+                            --relationships=Reviews="<path-to-folder>/reviews_relationship.csv" \
+                            --relationships=Writes="<path-to-folder>/writes_relationship.csv" \
