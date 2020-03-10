@@ -17,3 +17,6 @@ Once downloaded, we needed to generate csv files suitable to be loaded to the gr
 
 Once having the csvs, the bash script populate.sh will be used to load the data in the database.
 
+Csvs need preprocessing. Some columns are useless. The preprocessing_csvs.py script is being created for that purpose.
+
+

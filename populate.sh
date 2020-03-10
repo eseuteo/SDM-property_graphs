@@ -5,8 +5,10 @@
                             --delimiter ";"  \
                             --array-delimiter "|"  \
                             --id-type=INTEGER  \
-                            --nodes=Author="output_author.csv"  \
-                            --nodes=Article="/Users/irinanazarchuk/Documents/uni/SDM/output_/output_article_header.csv, /Users/irinanazarchuk/Documents/uni/SDM/output_/output_article.csv"  \
+
+                            --nodes=Author="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_author.csv"  \
+                            --nodes=Journal=""  \
+                            --nodes=Article="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_article_header.csv,/home/ricardohb/Documents/SDM/SDM-property_graphs/data/output_article.csv"  \
                             --nodes=Conference-Workshop="path" \
                             --nodes=Keyword="path" \
                             --nodes=Topic="path" \
