@@ -17,19 +17,21 @@ RETURN author_name, MAX(journal_index) AS h_index
 
 // 2) Find the top 3 most cited papers of each conference. 
 
-MATCH (:Article)-[c:cites]->(a:Article)-[:Presented_In]->(con:Conference_Workshop)
-WHERE c.Type = "Conference"
-ORDER BY count(c)
-RETURN a
-LIMIT 3
+MATCH ()-[c:Cites]->(a:Article)-[:Presented_In]->(cw:`Conference/Workshop`)
+WITH cw.name as ConferenceName, a.title as ArticleTitle, count(c) as ArticleCitations
+ORDER BY ConferenceName, ArticleCitations DESC
+WITH ConferenceName, collect(ArticleTitle)[0..3] as MostCitedArticles
+RETURN ConferenceName, MostCitedArticles
 
 
 // 3) For each conference find its community: i.e., those authors that have
 // published papers on that conference in, at least, 4 different editions. 
 
-MATCH (au:Author)-[:writes]->(ar:Article)-[:published_in]->(c:Conference)
-WHERE count(ar) >= 4
-RETURN c, collect(au)
+// Still working on this one
+MATCH (au:Author)<-[w:Writes]-(ar:Article)-[p:Presented_In]->(cw:`Conference/Workshop`)
+WITH cw.name as ConferenceName, p.edition as ConferenceEdition, au.author as Author
+order by ConferenceName, Author
+return ConferenceName, collect(ConferenceEdition), Author
 
 
 // 4) Find the impact factors of the journals in your graph (see

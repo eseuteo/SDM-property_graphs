@@ -30,4 +30,6 @@ CSVs need preprocessing. Besides, information (instances) are missing for some o
 
 Once having the csvs, the bash script populate.sh will be used to load the data in the database.
 
+The data for one of the relationships had to be updated. For it, the cql queries available in `update_presented_in_relationship.cql` were used.
+
 
