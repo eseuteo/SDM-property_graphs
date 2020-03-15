@@ -27,11 +27,11 @@ RETURN ConferenceName, MostCitedArticles
 // 3) For each conference find its community: i.e., those authors that have
 // published papers on that conference in, at least, 4 different editions. 
 
-// Still working on this one
 MATCH (au:Author)<-[w:Writes]-(ar:Article)-[p:Presented_In]->(cw:`Conference/Workshop`)
 WITH cw.name as ConferenceName, p.edition as ConferenceEdition, au.author as Author
-order by ConferenceName, Author
-return ConferenceName, collect(ConferenceEdition), Author
+WITH ConferenceName, collect(distinct ConferenceEdition) as Editions, Author
+WHERE size(Editions) >= 4
+RETURN ConferenceName, collect(Author)
 
 
 // 4) Find the impact factors of the journals in your graph (see
