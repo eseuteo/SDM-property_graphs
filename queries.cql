@@ -2,14 +2,15 @@
 // https://en.wikipedia.org/wiki/H-index, for a definition of the h-index metric).
 
 MATCH (a:Author)-[w:Writes]->(a:Article)<-[c:Cites]-(a2:Article)
-WITH a.name AS author_name, a.name AS article_title, count(a2.name) AS num_citations
+WITH a.name AS author_name, a.name AS article_title, count(c) AS num_citations
 ORDER BY author_name, num_citations DESC
 WITH author_name, collect(num_citations) AS citations
-UNWIND range(0, size(citations)-1) AS position
+[i ]
+UNWIND range(0, size(citations)-1) AS citations_size WITH author_name,
     CASE
-        WHEN citations[position] <= (position + 1)
-            THEN citations[position]
-            ELSE (position + 1)
+        WHEN citations[citations_size] <= (citations_size + 1)
+            THEN citations[citations_size] 
+            ELSE (citations_size + 1)
     END AS journal_index
 RETURN author_name, MAX(journal_index) AS h_index
 
@@ -51,5 +52,43 @@ ORDER BY impact_factor DESC
 
 CALL algo.pageRank.stream('Article', 'Cites', {iterations:20, dampingFactor:0.85})
 YIELD nodeId, score
-RETURN algo.getNodeById(node.Id).title AS page, score
+RETURN algo.getNodeById(nodeId).title AS page, score
 ORDER BY score DESC
+
+
+// Recommender
+//
+// 1) The first thing to do is to find/define the research communities. A community is
+// defined by a set of keywords. Assume that the database community is defined through
+// the following keywords: data management, indexing, data modeling, big data, data
+// processing, data storage and data querying.
+
+MATCH (a:Article)-[h:Has_Keyword]->(k:Keyword)
+WHERE k.name IN ["data management", "indexing", "indexing", data modeling", "big data", "data processing", "data storage", "data querying"]
+RETURN collect(distinct a.title) as Research_community
+
+
+
+// 3) Next, we want to identify the top papers of these conferences/journals. We need to
+// find the papers with the highest page rank provided the number of citations from the
+// papers of the same community (papers in the conferences/journals of the database
+// community). As a result we would obtain (highlight), say, the top-100 papers of the
+// conferences of the database community.
+
+CALL algo.pageRank.stream('Article', 'Cites', {iterations:20, dampingFactor:0.85})
+YIELD nodeId, score
+WITH algo.getNodeById(nodeId).title AS page, score
+WHERE page IN [$community_conference] // RESULT FROM 2nd query
+RETURN page, score
+ORDER BY score DESC
+LIMIT 100
+
+
+
+
+
+
+
+
+
+
