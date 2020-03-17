@@ -8,7 +8,7 @@ test.py, helloworld.py and a2_instantiating.py contain just some code to try the
 #### A.1. Modeling
 Modeling was done taking into account both the description provided and the queries that have to be done in section B.
 
-![Schema](schema.jpeg)
+![Schema](schema.png)
 
 #### A.2. Instantiating/Loading
 
@@ -32,4 +32,10 @@ Once having the csvs, the bash script populate.sh will be used to load the data 
 
 The data for one of the relationships had to be updated. For it, the cql queries available in `update_presented_in_relationship.cql` were used.
 
+#### A.3. Evolving the graph
 
+In order to evolve the graph with the requirements provided, a new node "Review" was created, containing two properties (content and decision). After it, two relationships were created; "Creates" and "About".
+
+The code developed in order to carry out these changes is available in the script <name of the script   >
+
+The resulting schema after evolving it can be seen in the image below.
