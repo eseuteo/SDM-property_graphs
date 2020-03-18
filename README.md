@@ -1,7 +1,7 @@
 # SDM-property_graphs
 Repository for SDM Lab 1
 
-test.py, helloworld.py and a2_instantiating.py contain just some code to try the python neo4j driver functionalities.
+All the data used to populate the database can be found here `https://drive.google.com/file/d/1DcF2gqNg2fnWW1FwiOP9dC4UPf1Vs7gs/view?usp=sharing`
 
 ### A. Modeling, Loading, Evolving
 
@@ -42,6 +42,15 @@ The code developed in order to create the new csvs is available in `generate_csv
 
 The resulting schema after evolving it can be seen in the image below.
 ![Evolved Schema](schema_evolved.png)
+
+#### B. Querying
+
+The queries created can be found in `queries.cql` and can be run in `queries.py`
+
+#### C. Algorithms
+
+The algorithms selected for this graph where PageRank and Louvain. More information is available in the report.
+The algorithms can be run with the script `algorithms.py`
 
 #### D. Recommender
 
