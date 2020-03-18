@@ -5,14 +5,19 @@
                             --delimiter ";"  \
                             --array-delimiter "|" \
                             --id-type=INTEGER  \
-                            --nodes:Article="$data_path/article_node.csv"  \
-                            --nodes:Author="$data_path/author_node.csv"  \
-                            --nodes:Conference/Workshop="$data_path/conference_workshop_node.csv" \
-                            --nodes:Journal="$data_path/journal_node.csv"  \
-                            --nodes:Keyword="$data_path/keyword_node.csv" \
-                            --relationships:Cites="$data_path/cites_relationship.csv" \
-                            --relationships:Has_Keyword="$data_path/has_keyword_relationship.csv"  \
-                            --relationships:Presented_In="$data_path/presented_in_relationship.csv" \
-                            --relationships:Published_In="$data_path/published_in_relationship.csv"  \
-                            --relationships:Reviews="$data_path/reviews_relationship.csv" \
-                            --relationships:Writes="$data_path/writes_relationship.csv" \
+                            --nodes:Article="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/article_node.csv"  \
+                            --nodes:Author="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/author_node.csv"  \
+                            --nodes:Conference/Workshop="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/conference_workshop_node.csv" \
+                            --nodes:Journal="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/journal_node.csv"  \
+                            --nodes:Keyword="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/keyword_node.csv" \
+                            --nodes:Review="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/review_node.csv" \
+                            --nodes:Affiliation="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/affiliation_node.csv" \
+                            --relationships:Cites="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/cites_relationship.csv" \
+                            --relationships:Has_Keyword="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/has_keyword_relationship.csv"  \
+                            --relationships:Presented_In="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/presented_in_relationship.csv" \
+                            --relationships:Published_In="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/published_in_relationship.csv"  \
+                       #     --relationships:Reviews="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/reviews_relationship.csv" \
+                            --relationships:Written_By="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/writes_relationship.csv" \
+                            --relationships:Makes="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/makes_relationship.csv" \
+                            --relationships:About="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/about_relationship.csv" \
+                            --relationships:Belongs="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/belongs_relationship.csv"

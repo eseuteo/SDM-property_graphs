@@ -1,27 +1,25 @@
 // 1) Find the h-indexes of the authors in your graph (see
 // https://en.wikipedia.org/wiki/H-index, for a definition of the h-index metric).
 
-MATCH (a:Author)-[w:Writes]->(a:Article)<-[c:Cites]-(a2:Article)
-WITH a.name AS author_name, a.name AS article_title, count(c) AS num_citations
-ORDER BY author_name, num_citations DESC
-WITH author_name, collect(num_citations) AS citations
-UNWIND range(0, size(citations)-1) AS citations_size WITH author_name,
-    CASE
-        WHEN citations[citations_size] <= (citations_size + 1)
-            THEN citations[citations_size] 
-            ELSE (citations_size + 1)
-    END AS journal_index
-RETURN author_name, MAX(journal_index) AS h_index
 
-
+MATCH (au:Author)<-[:Written_By]-(ar1:Article)<-[:Cites]-(ar2:Article)
+WITH au.author as Author, ar1.title as Article, count(ar2) as Citations
+ORDER BY Citations DESC
+WITH Author, collect(Citations) as Citations
+UNWIND range(0, size(Citations)-1) as citations_size WITH Author,
+CASE WHEN Citations[citations_size] <= (citations_size + 1)
+    THEN Citations[citations_size]
+    ELSE (citations_size + 1)
+END as journal_index
+RETURN Author, MAX(journal_index) as `H-Index`
 
 // 2) Find the top 3 most cited papers of each conference. 
 
 MATCH ()-[c:Cites]->(a:Article)-[:Presented_In]->(cw:`Conference/Workshop`)
-WITH cw.name as ConferenceName, a.title as ArticleTitle, count(c) as ArticleCitations
+WITH cw.name as ConferenceName, a as Article, count(c) as ArticleCitations
 ORDER BY ConferenceName, ArticleCitations DESC
-WITH ConferenceName, collect(ArticleTitle)[0..3] as MostCitedArticles
-RETURN ConferenceName, MostCitedArticles
+WITH ConferenceName, collect(Article.title)[0..3] as MostCitedArticles, collect(ArticleCitations)[0..3] as NumberOfCitations
+RETURN ConferenceName, MostCitedArticles, NumberOfCitations
 
 
 // 3) For each conference find its community: i.e., those authors that have
@@ -63,7 +61,7 @@ ORDER BY score DESC
 // processing, data storage and data querying.
 
 MATCH (a:Article)-[h:Has_Keyword]->(k:Keyword)
-WHERE k.name IN ["data management", "indexing", "indexing", data modeling", "big data", "data processing", "data storage", "data querying"]
+WHERE k.name IN ["data management", "indexing", "indexing", "data modeling", "big data", "data processing", "data storage", "data querying"]
 RETURN collect(distinct a.title) as Research_community
 
 
