@@ -5,7 +5,6 @@ MATCH (a:Author)-[w:Writes]->(a:Article)<-[c:Cites]-(a2:Article)
 WITH a.name AS author_name, a.name AS article_title, count(c) AS num_citations
 ORDER BY author_name, num_citations DESC
 WITH author_name, collect(num_citations) AS citations
-[i ]
 UNWIND range(0, size(citations)-1) AS citations_size WITH author_name,
     CASE
         WHEN citations[citations_size] <= (citations_size + 1)
