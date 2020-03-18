@@ -40,7 +40,7 @@ RETURN ConferenceName, collect(Author)
 // factor).
 
 MATCH (j:Journal)<-[p:Published_In]-(a1:Article)<-[c:Cites]-(a2:Article)
-WITH j.name AS journal_name, p.year AS journal_year, count(a2.name) AS citations, count(p) AS num_articles
+WITH j.journal AS journal_name, p.year AS journal_year, count(a2) AS citations, count(p) AS num_articles
 WHERE journal_year IN [(date().year-1), (date().year-2)]
 RETURN journal_name, sum(citations)/sum(num_articles) AS impact_factor
 ORDER BY impact_factor DESC
