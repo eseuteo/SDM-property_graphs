@@ -36,7 +36,9 @@ The data for one of the relationships had to be updated. For it, the cql queries
 
 In order to evolve the graph with the requirements provided, a new node "Review" was created, containing two properties (content and decision). After it, two relationships were created; "Creates" and "About".
 
-The code developed in order to create the new csvs is available in `generate_csvs_evolving_graph.ipynb`
+Besides, in order to model the affiliation of the authors, a new node "Affiliation" was created, as well as the relationship between the Affiliations and the Authors.
+
+The code developed in order to create the new csvs is available in `generate_csvs_evolving_graph.ipynb` and `generate_affiliation_and_belongs.ipynb`
 
 The resulting schema after evolving it can be seen in the image below.
 ![Evolved Schema](schema_evolved.png)
