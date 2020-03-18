@@ -24,13 +24,13 @@ def getCommunityConferences(session, keywords_list):
 
 def getCommunityJournals(session, keywords_list):
     communityJournalsQuery =    """ 
-                                MATCH (ar1:Article)-[:Presented_In]->(cw1:`Conference/Workshop`)
-                                WITH cw1.name as Conference, count(ar1) as NumOfArticles
-                                MATCH (kw:Keyword)<-[:Has_Keyword]-(ar2:Article)-[:Presented_In]->(cw2:`Conference/Workshop`)
-                                WHERE kw.keyword IN """ + str(keywords_list) + """ AND Conference = cw2.name
-                                WITH count(ar2) as NumOfRelatedArticles, Conference, NumOfArticles
+                                MATCH (ar1:Article)-[:Published_In]->(j1:Journal)
+                                WITH j1.journal as Journal, count(ar1) as NumOfArticles
+                                MATCH (kw:Keyword)<-[:Has_Keyword]-(ar2:Article)-[:Published_In]->(j2:Journal)
+                                WHERE kw.keyword IN ["data management", "indexing", "data modeling", "big data", "data processing", "data storage", "data querying"] AND Journal = j2.journal
+                                WITH count(ar2) as NumOfRelatedArticles, Journal, NumOfArticles
                                 WHERE (toFloat(NumOfRelatedArticles)/toFloat(NumOfArticles)) > 0.89
-                                RETURN Conference
+                                RETURN Journal
                                 """
     communityJournals = session.run(communityJournalsQuery)
     return communityJournals
@@ -78,26 +78,26 @@ session = driver.session()
 
 # query 1
 research_communities = getResearchCommunities(session, keywords_list)
+community_articles_list = [item[0] for item in research_communities.values()][0]
+community_articles_list = [item.replace(u'\xa0', u' ') for item in community_articles_list]
+# print(community_articles_list)
+
+# query 2
 communities_conferences = getCommunityConferences(session, keywords_list)
 communities_conferences = [item[0] for item in communities_conferences.values()]
 communities_journals = getCommunityJournals(session, keywords_list)
 communities_journals = [item[0] for item in communities_journals.values()]
-top_100_papers = getTopPapers(session, communities_conferences)
-top_100_papers = [item[0] for item in top_100_papers.values()]
-gurus = getGurus(session, top_100_papers)
-
-community_articles_list = []
-for article in research_communities:
-    for value in article["Research_community"]:
-        community_articles_list.append(value.encode('utf-8'))
-
-# query 2
-communities_conferences = getCommunityConferencesAndJournals(session, keywords_list)
-communities_conferences = [item[0] for item in communities_conferences.values()]
+communities_conferences_and_journals = communities_conferences + communities_journals
+# print(communities_conferences_and_journals)
 
 # query 3
 top_100_papers = getTopPapers(session, community_articles_list)
-print(top_100_papers)
+top_100_papers = [item[0] for item in top_100_papers.values()]
+for paper in top_100_papers:
+    print(paper)
 
 # query 4
 gurus = getGurus(session, top_100_papers)
+gurus = [item[0] for item in gurus.values()]
+# for guru in gurus:
+#     print(guru)
