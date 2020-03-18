@@ -16,7 +16,6 @@
                             --relationships:Has_Keyword="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/has_keyword_relationship.csv"  \
                             --relationships:Presented_In="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/presented_in_relationship.csv" \
                             --relationships:Published_In="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/published_in_relationship.csv"  \
-                       #     --relationships:Reviews="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/reviews_relationship.csv" \
                             --relationships:Written_By="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/writes_relationship.csv" \
                             --relationships:Makes="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/makes_relationship.csv" \
                             --relationships:About="/home/ricardohb/Documents/SDM/SDM-property_graphs/data/data_to_populate/about_relationship.csv" \
