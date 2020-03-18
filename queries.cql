@@ -1,6 +1,7 @@
 // 1) Find the h-indexes of the authors in your graph (see
 // https://en.wikipedia.org/wiki/H-index, for a definition of the h-index metric).
 
+
 MATCH (au:Author)<-[:Written_By]-(ar1:Article)<-[:Cites]-(ar2:Article)
 WITH au.author as Author, ar1.title as Article, count(ar2) as Citations
 ORDER BY Citations DESC

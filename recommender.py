@@ -36,12 +36,12 @@ def getCommunityJournals(session, keywords_list):
     return communityJournals
 
 
-def getTopPapers(session, conference_list):
+def getTopPapers(session, articles_list):
     topPapersQuery =    """ 
                         CALL algo.pageRank.stream('Article', 'Cites', {iterations:20, dampingFactor:0.85})
                         YIELD nodeId, score
                         WITH algo.getNodeById(nodeId).title AS page, score
-                        WHERE page IN """ + str(conference_list) + """
+                        WHERE page IN """ + str(articles_list) + """
                         RETURN page, score
                         ORDER BY score DESC
                         LIMIT 100
@@ -68,8 +68,15 @@ driver = GraphDatabase.driver(
     connection_timeout=3,
     max_retry_time=1)
 
-keywords_list = ["data management", "indexing", "data modeling", "big data", "data processing", "data storage", "data querying"]
+keywords_list = [
+    "data management", "indexing", "data modeling",
+    "big data", "data processing", "data storage",
+    "data querying"
+]
+
 session = driver.session()
+
+# query 1
 research_communities = getResearchCommunities(session, keywords_list)
 communities_conferences = getCommunityConferences(session, keywords_list)
 communities_conferences = [item[0] for item in communities_conferences.values()]
@@ -77,4 +84,20 @@ communities_journals = getCommunityJournals(session, keywords_list)
 communities_journals = [item[0] for item in communities_journals.values()]
 top_100_papers = getTopPapers(session, communities_conferences)
 top_100_papers = [item[0] for item in top_100_papers.values()]
+gurus = getGurus(session, top_100_papers)
+
+community_articles_list = []
+for article in research_communities:
+    for value in article["Research_community"]:
+        community_articles_list.append(value.encode('utf-8'))
+
+# query 2
+communities_conferences = getCommunityConferencesAndJournals(session, keywords_list)
+communities_conferences = [item[0] for item in communities_conferences.values()]
+
+# query 3
+top_100_papers = getTopPapers(session, community_articles_list)
+print(top_100_papers)
+
+# query 4
 gurus = getGurus(session, top_100_papers)
