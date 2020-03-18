@@ -42,3 +42,9 @@ The code developed in order to create the new csvs is available in `generate_csv
 
 The resulting schema after evolving it can be seen in the image below.
 ![Evolved Schema](schema_evolved.png)
+
+#### D. Recommender
+
+For the recommender, the Has_Keyword relationship had to be modified. In order to do so, the file `modify_has_keyword.ipynb` was created.
+
+The recommender is implemented in the `recommender.py` script. It consists of 4 different queries that are made by using the `Neo4j` python library.

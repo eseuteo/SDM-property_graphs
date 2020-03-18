@@ -60,7 +60,7 @@ ORDER BY score DESC
 // processing, data storage and data querying.
 
 MATCH (a:Article)-[h:Has_Keyword]->(k:Keyword)
-WHERE k.name IN ["data management", "indexing", "indexing", data modeling", "big data", "data processing", "data storage", "data querying"]
+WHERE k.name IN ["data management", "indexing", "indexing", "data modeling", "big data", "data processing", "data storage", "data querying"]
 RETURN collect(distinct a.title) as Research_community
 
 
