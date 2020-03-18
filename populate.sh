@@ -16,7 +16,7 @@
                             --relationships:Has_Keyword="$data_path/has_keyword_relationship.csv"  \
                             --relationships:Presented_In="$data_path/presented_in_relationship.csv" \
                             --relationships:Published_In="$data_path/published_in_relationship.csv"  \
-                            --relationships:Reviews="$data_path/reviews_relationship.csv" \
+                       #     --relationships:Reviews="$data_path/reviews_relationship.csv" \
                             --relationships:Written_By="$data_path/writes_relationship.csv" \
                             --relationships:Makes="$data_path/makes_relationship.csv" \
                             --relationships:About="$data_path/about_relationship.csv" \
